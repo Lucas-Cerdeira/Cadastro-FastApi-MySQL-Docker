@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mysql_knex:
+    container_name: mysql_bd
+    hostname: mysql_base_dados
+    image: mysql
+    restart: always
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb_force_recovery=0
+    volumes:
+      - C:\Users\Lucas\Documents\cadastro-pessoas:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: lucas4121
+      MYSQL_DATABASE: cadastro_pessoas
+      MYSQL_USER: lucas
+      MYSQL_PASSWORD: lucas123
+      TZ: America/Sao_Paulo
