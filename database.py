@@ -10,3 +10,4 @@ conexao = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor
 )
 
+
