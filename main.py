@@ -7,7 +7,7 @@ from utils import validate
 app = FastAPI()
 
 
-@app.get("/Cadastro Pessoa")
+@app.get("/Cadastro/Inserir_Pessoa")
 def cadastro_pessoa(first_name: str, cpf: str, email: str, dia: int, mes: int, ano: int, last_name: str = None):
     if not validate(cpf):
         return False
@@ -24,7 +24,7 @@ def cadastro_pessoa(first_name: str, cpf: str, email: str, dia: int, mes: int, a
             return True
 
 
-@app.get("/Ver pessoas")
+@app.get("/Cadastro/Ver_pessoas")
 def ver_pessoas():
     with conexao.cursor() as cursor:
         try:
@@ -40,7 +40,7 @@ def ver_pessoas():
             return [registro for registro in dados]
 
 
-@app.delete("/Remover-nome-lista")
+@app.delete("/Cadastro/Remover_Pessoa")
 def deletar(cpf):
     if not validate(cpf):
         return False
@@ -55,3 +55,15 @@ def deletar(cpf):
             return erro
         else:
             return True
+
+
+@app.put("/Cadastro/Atualiza_Informações")
+def atualiza_info(cpf: str, campo_alterado: str, novo_registro: str):
+    if not validate(cpf):
+        return False
+    if not campo_alterado in ['email', 'first_name']:
+        return False
+    with conexao.cursor() as cursor:
+        cursor.execute(
+            f"""UPDATE FROM pessoas SET {campo_alterado} = '{novo_registro}' WHERE cpf = '{cpf}';"""
+        )
