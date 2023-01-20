@@ -2,7 +2,6 @@ import re
 
 
 def validate(cpf: str) -> bool:
-
     """ Efetua a validação do CPF, tanto formatação quando dígito verificadores.
 
     Parâmetros:
