@@ -1,7 +1,7 @@
 import re
 
 
-def validate(cpf: str) -> bool:
+def validate_cpf(cpf: str) -> bool:
     """ Efetua a validação do CPF, tanto formatação quando dígito verificadores.
 
     Parâmetros:
@@ -48,3 +48,13 @@ def validate(cpf: str) -> bool:
         return False
 
     return True
+
+
+REGEX = r"^([a-z0-9-._]+)@([a-z0-9]+)(\.[a-z]{1,3})+$"
+
+
+def valid_email(email):
+    match = re.match(REGEX, email)
+    if match:
+        return True
+    return False
