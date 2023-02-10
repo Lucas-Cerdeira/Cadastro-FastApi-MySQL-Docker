@@ -1,6 +1,12 @@
 import re
 
 
+
+def format_cpf(cpf):
+    if not cpf.isdigit():
+        cpf = ''.join([c for c in cpf if c.isdigit()])
+    return f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+
 def validate_cpf(cpf: str) -> bool:
     """ Efetua a validação do CPF, tanto formatação quando dígito verificadores.
 
