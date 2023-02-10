@@ -13,15 +13,14 @@ def inserir_no_bd(first_name, last_name, cpf, email, dia, mes, ano):
         except Exception as erro:
             return erro
         else:
-            retorno = f"Parabéns, {first_name}, seu cadastro foi realizado com sucesso!"
-            return json.dumps(retorno)
+            return json.dumps("Parabéns, {first_name}, seu cadastro foi realizado com sucesso!", ensure_ascii=False)
         finally:
             conexao.commit()
 
 
 def ver_dados(cpf):
     if not in_on_database(cpf):
-        return "Cpf não cadastrado na base de dados."
+        return json.dumps("Cpf não cadastrado na base de dados.", ensure_ascii=False)
     with conexao.cursor() as cursor:
         try:
             cursor.execute(
@@ -55,7 +54,7 @@ def in_on_database(cpf):
             return True
 
 
-def deletar_dado(cpf):  # verificar se cpf está cadastrado
+def deletar_dado(cpf): 
     with conexao.cursor() as cursor:
         try:
             cursor.execute(
@@ -65,7 +64,7 @@ def deletar_dado(cpf):  # verificar se cpf está cadastrado
         except Exception as erro:
             return erro
         else:
-            return 'Seus dados foram deletados com sucesso.'
+            return json.dumps("Seus dados foram deletados com sucesso.", ensure_ascii=False)
         finally:
             conexao.commit()
 
@@ -81,6 +80,6 @@ def update_data(cpf, campo_alterado, novo_registro):
         except Exception as erro:
             return erro
         else:
-            return 'Alteração realizada com sucesso!'
+            return json.dumps("Alteração realizada com sucesso!", ensure_ascii=False)
         finally:
             conexao.commit()
