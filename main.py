@@ -22,7 +22,6 @@ def cadastro_pessoa(first_name: str, last_name: str, cpf: str, email: str, dia: 
     return retorno
 
 
-
 @app.get("/Ver_pessoas")
 def ver_pessoas(cpf):
     cpf = format_cpf(cpf)
@@ -54,7 +53,7 @@ def atualiza_info(cpf: str, campo_alterado: str, novo_registro: str):
         return {"status": "error", "message": "CPF não cadastrado na base de dados"}
     if not validate_cpf(cpf):
         return {"status": "error", "message": "Por favor insira um CPF válido"}
-    if not campo_alterado in ['email', 'first_name']:
+    if not campo_alterado in ['email', 'first_name', 'last_name']:
         return {"status": "error", "message": "Campo alterado inválido"}
     retorno = update_data(cpf, campo_alterado, novo_registro)
     if retorno:

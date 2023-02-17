@@ -15,7 +15,7 @@ def inserir_no_bd(first_name, last_name, cpf, email, dia, mes, ano):
         except Exception as erro:
             return erro
         else:
-            return json.dumps(mensagem_sucesso, ensure_ascii=False)
+            return json.dumps({"status": "success", "mensagem": mensagem_sucesso}, ensure_ascii=False)
         finally:
             conexao.commit()
 
@@ -34,7 +34,7 @@ def ver_dados(cpf):
         if not dados:
             return json.dumps({"mensagem": "Não foi encontrado nenhum registro com esse CPF."}, ensure_ascii=False)
         else:
-            return json.dumps(dados, ensure_ascii=False)
+            return json.dumps({"status": "success", "mensagem": dados}, ensure_ascii=False)
 
 
 def in_on_database(cpf):
@@ -60,7 +60,7 @@ def deletar_dado(cpf):
         )
         conexao.commit()
 
-        return json.dumps({"mensagem": "Seus dados foram deletados com sucesso."}, ensure_ascii=False)
+        return json.dumps({"status": "success", "mensagem": "Seus dados foram deletados com sucesso."}, ensure_ascii=False)
 
 
 def update_data(cpf, campo_alterado, novo_registro):
@@ -70,4 +70,4 @@ def update_data(cpf, campo_alterado, novo_registro):
             (novo_registro, cpf)
         )
         conexao.commit()
-        return json.dumps("Alteração realizada com sucesso!", ensure_ascii=False)
+        return json.dumps({"status": "success", "mensagem": "Alteração realizada com sucesso!"}, ensure_ascii=False)
